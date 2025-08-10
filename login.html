@@ -20,40 +20,40 @@
   </header>
 
 <main role="main">
-  <!-- Pantalla Principal -->
-  <section id="mainSection" aria-labelledby="mainTitle">
-    <h2 id="mainTitle">Bienvenida</h2>
-    <p id="welcomeMsg"></p>
 
-    <label for="languageSelect" class="form-label mt-3">Seleccionar idioma</label>
-    <select id="languageSelect" class="form-select" aria-label="Selector de idioma">
-      <option value="es">Español - Árabe</option>
-      <option value="en">Inglés - Árabe</option>
-      <option value="ar">عربى (العربية)</option>
-       <option value="fr">Francés - Árabe</option>
-       <option value="de">Alemán - Árabe</option>
-       <option value="it">Italiano - Árabe</option>
-    </select>
 
-    <div class="mt-4">
-      <a class="btn btn-outline-primary me-2" href="alphabet.html" >Ir a Alfabeto</a>
-      <a class="btn btn-outline-primary me-2" href="modules.html" >Ir a Módulos</a>
-      <a class="btn btn-outline-primary me-2" href="settings.html" >Ir a Ajustes</a>
-      <a class="btn btn-outline-primary me-2" href="progress.html" >Ver progreso</a>
-
+<!-- Login -->
+  <section id="loginSection" class="active" aria-labelledby="loginTitle">
+  <div class="login-container">
+    <form id="loginForm" novalidate>
+      <h2 id="loginTitle">Iniciar sesión</h2> <!-- Poner el título aquí -->
+      <div class="mb-3">
+        <label for="loginEmail" class="form-label">Correo electrónico</label>
+        <input type="email" id="loginEmail" class="form-control" required aria-describedby="emailHelp" />
+        <div class="invalid-feedback" role="alert" aria-live="assertive" id="loginEmailError"></div>
+      </div>
+      <div class="mb-3">
+        <label for="loginPassword" class="form-label">Contraseña</label>
+        <input type="password" id="loginPassword" class="form-control" required minlength="6" />
+        <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
+      </div>
+      <button type="submit" class="btn btn-primary">Entrar</button>
+      <button type="button" id="goToRegister" class="btn btn-danger ms-2">Registrarse</button>
+    </form>
+    <div class="coran-image-wrapper">
+      <img src="Images/Coran.jpg" alt="Corán" class="coran-img" />
     </div>
+  </div>
+</section>
 
-    <button id="logoutBtn" class="btn btn-danger mt-3">Cerrar sesión</button>
-  </section>
-
-  
-
+    
 </main>
 
 <!-- Bootstrap JS bundle (incluye Popper) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="script.js"></script>
+
 
 <footer role="contentinfo" class="mt-4 py-3 border-top text-center text-muted">
   <p>© 2025 Aprende Árabe con Harakat. Todos los derechos reservados.</p>

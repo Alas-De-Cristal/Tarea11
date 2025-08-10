@@ -20,34 +20,42 @@
   </header>
 
 <main role="main">
-  <!-- Pantalla Principal -->
-  <section id="mainSection" aria-labelledby="mainTitle">
-    <h2 id="mainTitle">Bienvenida</h2>
-    <p id="welcomeMsg"></p>
 
-    <label for="languageSelect" class="form-label mt-3">Seleccionar idioma</label>
-    <select id="languageSelect" class="form-select" aria-label="Selector de idioma">
-      <option value="es">Español - Árabe</option>
-      <option value="en">Inglés - Árabe</option>
-      <option value="ar">عربى (العربية)</option>
-       <option value="fr">Francés - Árabe</option>
-       <option value="de">Alemán - Árabe</option>
-       <option value="it">Italiano - Árabe</option>
-    </select>
+<!-- Registro -->
+  <section id="registerSection" aria-labelledby="registerTitle">
+    <h2 id="registerTitle">Registro</h2>
+    <form id="registerForm" novalidate>
+      <div class="mb-3">
+        <label for="regName" class="form-label">Nombre</label>
+        <input type="text" id="regName" class="form-control" required />
+        <div class="invalid-feedback">Por favor ingresa tu nombre.</div>
+      </div>
+      <div class="mb-3">
+        <label for="regEmail" class="form-label">Correo electrónico</label>
+        <input type="email" id="regEmail" class="form-control" required />
+        <div class="invalid-feedback">Por favor ingresa un correo válido.</div>
+      </div>
+      <div class="mb-3">
+        <label for="regPassword" class="form-label">Contraseña</label>
+        <input type="password" id="regPassword" class="form-control" required minlength="6" />
+        <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
+      </div>
+      <div class="mb-3">
+        <label for="regConfirmPassword" class="form-label">Confirmar contraseña</label>
+        <input type="password" id="regConfirmPassword" class="form-control" required />
+        <div class="invalid-feedback">Las contraseñas deben coincidir.</div>
+      </div>
+      <button type="submit" class="btn btn-success">Registrarse</button>
+      <button type="button" id="goToLogin" class="btn btn-outline-secondary ms-2">Volver al login</button>
+    </form>
 
-    <div class="mt-4">
-      <a class="btn btn-outline-primary me-2" href="alphabet.html" >Ir a Alfabeto</a>
-      <a class="btn btn-outline-primary me-2" href="modules.html" >Ir a Módulos</a>
-      <a class="btn btn-outline-primary me-2" href="settings.html" >Ir a Ajustes</a>
-      <a class="btn btn-outline-primary me-2" href="progress.html" >Ver progreso</a>
-
-    </div>
-
-    <button id="logoutBtn" class="btn btn-danger mt-3">Cerrar sesión</button>
   </section>
 
-  
 
+
+
+
+    
 </main>
 
 <!-- Bootstrap JS bundle (incluye Popper) -->

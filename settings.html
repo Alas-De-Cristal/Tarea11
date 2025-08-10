@@ -20,34 +20,37 @@
   </header>
 
 <main role="main">
-  <!-- Pantalla Principal -->
-  <section id="mainSection" aria-labelledby="mainTitle">
-    <h2 id="mainTitle">Bienvenida</h2>
-    <p id="welcomeMsg"></p>
 
-    <label for="languageSelect" class="form-label mt-3">Seleccionar idioma</label>
-    <select id="languageSelect" class="form-select" aria-label="Selector de idioma">
-      <option value="es">Español - Árabe</option>
-      <option value="en">Inglés - Árabe</option>
-      <option value="ar">عربى (العربية)</option>
-       <option value="fr">Francés - Árabe</option>
-       <option value="de">Alemán - Árabe</option>
-       <option value="it">Italiano - Árabe</option>
-    </select>
 
-    <div class="mt-4">
-      <a class="btn btn-outline-primary me-2" href="alphabet.html" >Ir a Alfabeto</a>
-      <a class="btn btn-outline-primary me-2" href="modules.html" >Ir a Módulos</a>
-      <a class="btn btn-outline-primary me-2" href="settings.html" >Ir a Ajustes</a>
-      <a class="btn btn-outline-primary me-2" href="progress.html" >Ver progreso</a>
-
-    </div>
-
-    <button id="logoutBtn" class="btn btn-danger mt-3">Cerrar sesión</button>
+<!-- Pantalla Ajustes -->
+  <section id="settingsSection" aria-labelledby="settingsTitle">
+    <h2 id="settingsTitle">Ajustes</h2>
+    <form id="settingsForm">
+      <div class="mb-3">
+        <label for="fontSize" class="form-label">Tamaño de fuente</label>
+        <select id="fontSize" class="form-select" aria-label="Seleccionar tamaño de fuente">
+          <option value="16">Normal</option>
+          <option value="20">Grande</option>
+          <option value="24">Muy grande</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="languageSetting" class="form-label">Idioma de la interfaz</label>
+        <select id="languageSetting" class="form-select" aria-label="Seleccionar idioma de la interfaz">
+          <option value="es">Español - Árabe</option>
+          <option value="en">Inglés - Árabe</option>
+          <option value="ar">عربى (العربية)</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar ajustes</button>
+      <button type="button" class="btn btn-secondary ms-2" onclick="showSection('indexSection')">Cancelar</button>
+    </form>
   </section>
 
-  
 
+
+
+    
 </main>
 
 <!-- Bootstrap JS bundle (incluye Popper) -->

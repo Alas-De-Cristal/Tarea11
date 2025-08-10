@@ -20,34 +20,64 @@
   </header>
 
 <main role="main">
-  <!-- Pantalla Principal -->
-  <section id="mainSection" aria-labelledby="mainTitle">
-    <h2 id="mainTitle">Bienvenida</h2>
-    <p id="welcomeMsg"></p>
 
-    <label for="languageSelect" class="form-label mt-3">Seleccionar idioma</label>
-    <select id="languageSelect" class="form-select" aria-label="Selector de idioma">
-      <option value="es">Español - Árabe</option>
-      <option value="en">Inglés - Árabe</option>
-      <option value="ar">عربى (العربية)</option>
-       <option value="fr">Francés - Árabe</option>
-       <option value="de">Alemán - Árabe</option>
-       <option value="it">Italiano - Árabe</option>
-    </select>
-
-    <div class="mt-4">
-      <a class="btn btn-outline-primary me-2" href="alphabet.html" >Ir a Alfabeto</a>
-      <a class="btn btn-outline-primary me-2" href="modules.html" >Ir a Módulos</a>
-      <a class="btn btn-outline-primary me-2" href="settings.html" >Ir a Ajustes</a>
-      <a class="btn btn-outline-primary me-2" href="progress.html" >Ver progreso</a>
-
-    </div>
-
-    <button id="logoutBtn" class="btn btn-danger mt-3">Cerrar sesión</button>
-  </section>
-
+<!-- Pantalla Alfabeto -->
+<section id="alphabetSection" aria-labelledby="alphabetTitle">
+  <h2 id="alphabetTitle">Alfabeto Árabe con Harakat</h2>
+  <p>Aquí verás el alfabeto con sus nombres y los diferentes harakats (Fatha, Kasra, Damma, Sukun, Shadda).</p>
   
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Letra</th>
+        <th>Nombre</th>
+        <th>Fatha (َ)</th>
+        <th>Kasra (ِ)</th>
+        <th>Damma (ُ)</th>
+        <th>Sukun (ْ)</th>
+        <th>Shadda (ّ)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>ا</td><td>Alif</td><td>أَ</td><td>إِ</td><td>أُ</td><td>ـ</td><td>ـ</td></tr>
+      <tr><td>ب</td><td>Ba</td><td>بَ</td><td>بِ</td><td>بُ</td><td>بْ</td><td>بّ</td></tr>
+      <tr><td>ت</td><td>Ta</td><td>تَ</td><td>تِ</td><td>تُ</td><td>تْ</td><td>تّ</td></tr>
+      <tr><td>ث</td><td>Tha</td><td>ثَ</td><td>ثِ</td><td>ثُ</td><td>ثْ</td><td>ثّ</td></tr>
+      <tr><td>ج</td><td>Jim</td><td>جَ</td><td>جِ</td><td>جُ</td><td>جْ</td><td>جّ</td></tr>
+      <tr><td>ح</td><td>Ḥa</td><td>حَ</td><td>حِ</td><td>حُ</td><td>حْ</td><td>حّ</td></tr>
+      <tr><td>خ</td><td>Kha</td><td>خَ</td><td>خِ</td><td>خُ</td><td>خْ</td><td>خّ</td></tr>
+      <tr><td>د</td><td>Dal</td><td>دَ</td><td>دِ</td><td>دُ</td><td>دْ</td><td>دّ</td></tr>
+      <tr><td>ذ</td><td>Dhal</td><td>ذَ</td><td>ذِ</td><td>ذُ</td><td>ذْ</td><td>ذّ</td></tr>
+      <tr><td>ر</td><td>Ra</td><td>رَ</td><td>رِ</td><td>رُ</td><td>رْ</td><td>رّ</td></tr>
+      <tr><td>ز</td><td>Zay</td><td>زَ</td><td>زِ</td><td>زُ</td><td>زْ</td><td>زّ</td></tr>
+      <tr><td>س</td><td>Sin</td><td>سَ</td><td>سِ</td><td>سُ</td><td>سْ</td><td>سّ</td></tr>
+      <tr><td>ش</td><td>Shin</td><td>شَ</td><td>شِ</td><td>شُ</td><td>شْ</td><td>شّ</td></tr>
+      <tr><td>ص</td><td>Ṣad</td><td>صَ</td><td>صِ</td><td>صُ</td><td>صْ</td><td>صّ</td></tr>
+      <tr><td>ض</td><td>Ḍad</td><td>ضَ</td><td>ضِ</td><td>ضُ</td><td>ضْ</td><td>ضّ</td></tr>
+      <tr><td>ط</td><td>Ṭa</td><td>طَ</td><td>طِ</td><td>طُ</td><td>طْ</td><td>طّ</td></tr>
+      <tr><td>ظ</td><td>Ẓa</td><td>ظَ</td><td>ظِ</td><td>ظُ</td><td>ظْ</td><td>ظّ</td></tr>
+      <tr><td>ع</td><td>‘Ayn</td><td>عَ</td><td>عِ</td><td>عُ</td><td>عْ</td><td>عّ</td></tr>
+      <tr><td>غ</td><td>Ghayn</td><td>غَ</td><td>غِ</td><td>غُ</td><td>غْ</td><td>غّ</td></tr>
+      <tr><td>ف</td><td>Fa</td><td>فَ</td><td>فِ</td><td>فُ</td><td>فْ</td><td>فّ</td></tr>
+      <tr><td>ق</td><td>Qaf</td><td>قَ</td><td>قِ</td><td>قُ</td><td>قْ</td><td>قّ</td></tr>
+      <tr><td>ك</td><td>Kaf</td><td>كَ</td><td>كِ</td><td>كُ</td><td>كْ</td><td>كّ</td></tr>
+      <tr><td>ل</td><td>Lam</td><td>لَ</td><td>لِ</td><td>لُ</td><td>لْ</td><td>لّ</td></tr>
+      <tr><td>م</td><td>Mim</td><td>مَ</td><td>مِ</td><td>مُ</td><td>مْ</td><td>مّ</td></tr>
+      <tr><td>ن</td><td>Nun</td><td>نَ</td><td>نِ</td><td>نُ</td><td>نْ</td><td>نّ</td></tr>
+      <tr><td>هـ</td><td>Ha</td><td>هَ</td><td>هِ</td><td>هُ</td><td>هْ</td><td>هّ</td></tr>
+      <tr><td>و</td><td>Waw</td><td>وَ</td><td>وِ</td><td>وُ</td><td>وْ</td><td>وّ</td></tr>
+      <tr><td>ي</td><td>Ya</td><td>يَ</td><td>يِ</td><td>يُ</td><td>يْ</td><td>يّ</td></tr>
+    </tbody>
+  </table>
+  
+  <button class="btn btn-secondary mt-3" onclick="showSection('indexSection')">Volver</button>
+</section>
 
+
+
+
+
+    
 </main>
 
 <!-- Bootstrap JS bundle (incluye Popper) -->

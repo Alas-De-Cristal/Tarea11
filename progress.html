@@ -20,34 +20,21 @@
   </header>
 
 <main role="main">
-  <!-- Pantalla Principal -->
-  <section id="mainSection" aria-labelledby="mainTitle">
-    <h2 id="mainTitle">Bienvenida</h2>
-    <p id="welcomeMsg"></p>
 
-    <label for="languageSelect" class="form-label mt-3">Seleccionar idioma</label>
-    <select id="languageSelect" class="form-select" aria-label="Selector de idioma">
-      <option value="es">Español - Árabe</option>
-      <option value="en">Inglés - Árabe</option>
-      <option value="ar">عربى (العربية)</option>
-       <option value="fr">Francés - Árabe</option>
-       <option value="de">Alemán - Árabe</option>
-       <option value="it">Italiano - Árabe</option>
-    </select>
 
-    <div class="mt-4">
-      <a class="btn btn-outline-primary me-2" href="alphabet.html" >Ir a Alfabeto</a>
-      <a class="btn btn-outline-primary me-2" href="modules.html" >Ir a Módulos</a>
-      <a class="btn btn-outline-primary me-2" href="settings.html" >Ir a Ajustes</a>
-      <a class="btn btn-outline-primary me-2" href="progress.html" >Ver progreso</a>
+<!-- Pantalla Progreso -->
+<section id="progressSection" aria-labelledby="progressTitle">
+  <h2 id="progressTitle">Tu progreso</h2>
+  <div id="progressContent">
+    <!-- Aquí se mostrará el progreso -->
+  </div>
+  <button class="btn btn-secondary mt-3" onclick="showSection('indexSection')">Volver</button>
+</section>
 
-    </div>
 
-    <button id="logoutBtn" class="btn btn-danger mt-3">Cerrar sesión</button>
-  </section>
 
-  
 
+    
 </main>
 
 <!-- Bootstrap JS bundle (incluye Popper) -->

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aplicación Aprende Árabe - Prototipo Funcional</title>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Imagen fija del Corán -->
+   <img src="Images/Coran.jpg" alt="Corán" class="coran-img">
+
+  <header class="mb-4" role="banner">
+    <h1 id="appTitle">Aprende Árabe con Harakat</h1>
+    <button id="toggleDarkMode" class="btn btn-secondary" aria-pressed="false">Modo Oscuro</button>
+  </header>
+
+<main role="main">
+
+<!-- Pantalla Módulos -->
+  <section id="modulesSection" aria-labelledby="modulesTitle">
+  <h2 id="modulesTitle">Módulos de aprendizaje</h2>
+  <ul>
+   <li>
+ <button class="btn btn-link" type="button" onclick="toggleModuleContent('saludosContent')">Saludos</button>
+<div id="saludosContent" style="display:none; margin-left:20px;">
+  <p><strong>السلام عليكم</strong> = <em>As-salāmu ʿalaykum</em> — La paz sea contigo / Saludo islámico formal</p>
+  <p><strong>وعليكم السلام</strong> = <em>Wa ʿalaykum as-salām</em> — Y contigo la paz (respuesta)</p>
+  <p><strong>مرحبًا</strong> = <em>Marḥabān</em> — Hola / Bienvenido</p>
+  <p><strong>أهلاً</strong> = <em>Ahlan</em> — Hola / Bienvenido</p>
+  <p><strong>أهلاً وسهلاً</strong> = <em>Ahlan wa sahlan</em> — Bienvenido</p>
+  <p><strong>صباح الخير</strong> = <em>Ṣabāḥ al-khayr</em> — Buenos días</p>
+  <p><strong>صباح النور</strong> = <em>Ṣabāḥ an-nūr</em> — Buenos días (respuesta)</p>
+  <p><strong>مساء الخير</strong> = <em>Masāʾ al-khayr</em> — Buenas tardes/noches</p>
+  <p><strong>مساء النور</strong> = <em>Masāʾ an-nūr</em> — Buenas tardes/noches (respuesta)</p>
+  <p><strong>كيف حالك؟ (m)</strong> = <em>Kayfa ḥāluka</em> — ¿Cómo estás? (a hombre)</p>
+  <p><strong>كيف حالك؟ (f)</strong> = <em>Kayfa ḥāluki</em> — ¿Cómo estás? (a mujer)</p>
+  <p><strong>الحمد لله</strong> = <em>Al-ḥamdu lillāh</em> — Gracias a Dios / Estoy bien</p>
+  <p><strong>بخير، شكرًا</strong> = <em>Bikhayr, shukran</em> — Bien, gracias</p>
+  <p><strong>مع السلامة</strong> = <em>Maʿa as-salāmah</em> — Adiós / Con paz</p>
+  <p><strong>في أمان الله</strong> = <em>Fī amān Allāh</em> — Que Dios te proteja (despedida)</p>
+</div>
+</li>
+    <li>
+  <button class="btn btn-link" type="button" onclick="toggleModuleContent('vocabularioContent')">Vocabulario</button>
+<div id="vocabularioContent" style="display:none; margin-left:20px;">
+  <p><strong>كتاب</strong> = <em>Kitāb</em> — Libro</p>
+  <p><strong>مدرسة</strong> = <em>Madrasa</em> — Escuela</p>
+  <p><strong>باب</strong> = <em>Bāb</em> — Puerta</p>
+  <p><strong>بيت</strong> = <em>Bayt</em> — Casa</p>
+  <p><strong>ماء</strong> = <em>Māʾ</em> — Agua</p>
+  <p><strong>طعام</strong> = <em>Ṭaʿām</em> — Comida</p>
+  <p><strong>سماء</strong> = <em>Samāʾ</em> — Cielo</p>
+  <p><strong>قمر</strong> = <em>Qamar</em> — Luna</p>
+  <p><strong>شمس</strong> = <em>Shams</em> — Sol</p>
+  <p><strong>ولد</strong> = <em>Walad</em> — Niño</p>
+  <p><strong>بنت</strong> = <em>Bint</em> — Niña</p>
+  <p><strong>قلب</strong> = <em>Qalb</em> — Corazón</p>
+  <p><strong>سلام</strong> = <em>Salām</em> — Paz</p>
+  <p><strong>صديق</strong> = <em>Ṣadīq</em> — Amigo</p>
+  <p><strong>حب</strong> = <em>Ḥubb</em> — Amor</p>
+</div>
+</li>
+    <li>
+ <button class="btn btn-link" type="button" onclick="toggleModuleContent('objetosContent')">Objetos</button>
+<div id="objetosContent" style="display:none; margin-left:20px;">
+  <p><strong>طاولة</strong> = <em>Ṭāwila</em> — Mesa</p>
+  <p><strong>كرسي</strong> = <em>Kursī</em> — Silla</p>
+  <p><strong>باب</strong> = <em>Bāb</em> — Puerta</p>
+  <p><strong>نافذة</strong> = <em>Nāfiḏa</em> — Ventana</p>
+  <p><strong>سرير</strong> = <em>Sarīr</em> — Cama</p>
+  <p><strong>مصباح</strong> = <em>Miṣbāḥ</em> — Lámpara</p>
+  <p><strong>ساعة</strong> = <em>Sāʿa</em> — Reloj</p>
+  <p><strong>حقيبة</strong> = <em>Ḥaqība</em> — Bolsa / Mochila</p>
+  <p><strong>هاتف</strong> = <em>Hātif</em> — Teléfono</p>
+  <p><strong>قلم</strong> = <em>Qalam</em> — Bolígrafo</p>
+  <p><strong>لوحة</strong> = <em>Lawḥa</em> — Cuadro / Pizarra</p>
+  <p><strong>ثلاجة</strong> = <em>Thalāja</em> — Refrigerador</p>
+  <p><strong>طعام</strong> = <em>Ṭaʿām</em> — Comida</p>
+  <p><strong>مرآة</strong> = <em>Mirʾā</em> — Espejo</p>
+  <p><strong>سجادة</strong> = <em>Sajjāda</em> — Alfombra</p>
+</div>
+</li>
+
+    <!-- Añade más módulos -->
+     <p>Selecciona un módulo para aprender vocabulario y frases comunes en árabe con su pronunciación y traducción.</p>
+ </ul>
+  <button class="btn btn-secondary" onclick="showSection('indexSection')">Volver</button>
+</section>
+
+
+
+
+
+    
+</main>
+
+<!-- Bootstrap JS bundle (incluye Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="script.js"></script>
+
+<footer role="contentinfo" class="mt-4 py-3 border-top text-center text-muted">
+  <p>© 2025 Aprende Árabe con Harakat. Todos los derechos reservados.</p>
+  <p>
+    <a href="#" class="link-primary" data-bs-toggle="modal" data-bs-target="#contactModal">Contacto</a> | 
+    <a href="#" class="link-primary" data-bs-toggle="modal" data-bs-target="#termsModal">Términos y condiciones</a>
+  </p>
+</footer>
+
+<!-- Modal de Contacto -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="contactModalLabel">Contacto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body text-start">
+        <p><strong>Nombre del creador:</strong> Martha Edilma Tayan</p>
+        <p><strong>Correo electrónico:</strong> <a href="mailto:mtayan@utm.edu.ec">mtayan@utm.edu.ec</a></p>
+        <p><strong>Teléfono:</strong> <a href="tel:+593959595749">0959595749</a></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Términos y condiciones -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="termsModalLabel">Términos y condiciones</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body text-start" style="max-height: 400px; overflow-y: auto;">
+        <p>
+          Bienvenido a Aprende Árabe con Harakat. Al utilizar esta aplicación, aceptas cumplir con los siguientes términos y condiciones:
+        </p>
+        <ul>
+          <li>La aplicación se ofrece "tal cual" sin garantías explícitas.</li>
+          <li>Los datos de usuario son almacenados localmente en el navegador y no se comparten.</li>
+          <li>El creador no se hace responsable por daños derivados del uso de la aplicación.</li>
+          <li>El contenido es para fines educativos y personales únicamente.</li>
+          <li>Se prohíbe la redistribución comercial sin permiso.</li>
+        </ul>
+        <p>Para más información, contacta al creador.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

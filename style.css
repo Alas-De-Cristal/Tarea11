@@ -1,0 +1,108 @@
+body {
+    padding: 20px;
+  }
+  .dark-mode {
+    background-color: #121212;
+    color: #eee;
+  }
+  .dark-mode .form-control {
+    background-color: #333;
+    color: #eee;
+    border-color: #555;
+  }
+  .dark-mode .btn-primary {
+    background-color: #bb86fc;
+    border-color: #bb86fc;
+  }
+  /* Ocultar secciones */
+  
+  section.active {
+    display: block;
+  }
+  #loginSection {
+  min-height: 100vh;
+  padding: 20px;
+  background-image: url('Images/tierra.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedor flex para formulario y la imagen */
+.login-container {
+  display: flex;
+  align-items: center;
+  gap: 40px; /* espacio entre formulario e imagen */
+  background: rgba(0, 0, 0, 0.5); /* fondo semitransparente */
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 900px;
+  width: 90%;
+}
+
+/* Ajuste formulario para que ocupe más espacio */
+#loginForm {
+  flex: 1;
+}
+
+/* Wrapper para la imagen para controlar tamaño */
+.coran-image-wrapper {
+  flex-shrink: 0;
+}
+
+.coran-img {
+  width: 120px; /* tamaño fijo pero adaptable */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  .coran-img {
+    width: 100px;
+  }
+}
+@media (max-width: 480px) {
+  #loginSection {
+    padding: 10px;
+  }
+  .coran-img {
+    width: 80px;
+  }
+}
+body.dark-mode footer.mt-4.py-3.border-top.text-center.text-muted {
+  color: #ccc !important;  /* Texto gris claro */
+}
+
+body.dark-mode footer.mt-4.py-3.border-top.text-center.text-muted a {
+  color: #9ecfff !important; /* Links azul claro */
+  text-decoration: underline;
+}
+body.dark-mode .modal-content {
+  background-color: #2c2c2c !important;  /* fondo oscuro */
+  color: #ccc !important;                 /* texto claro */
+}
+
+body.dark-mode .modal-content a {
+  color: #9ecfff !important;              /* enlaces azul claro */
+  text-decoration: underline;
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+  border-color: #444 !important;          /* bordes más visibles en modo oscuro */
+  background-color: #2c2c2c !important;   /* fondo oscuro en header y footer */
+}
+
+body.dark-mode .btn-close {
+  filter: invert(1);                      /* para que el botón cerrar se vea bien */
+}
