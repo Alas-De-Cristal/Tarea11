@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aplicación Aprende Árabe - Prototipo Funcional</title>
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+  body {
+    padding: 20px;
+  }
+  .dark-mode {
+    background-color: #121212;
+    color: #eee;
+  }
+  .dark-mode .form-control {
+    background-color: #333;
+    color: #eee;
+    border-color: #555;
+  }
+  .dark-mode .btn-primary {
+    background-color: #bb86fc;
+    border-color: #bb86fc;
+  }
+  /* Ocultar secciones */
+  section {
+    display: none;
+  }
+  section.active {
+    display: block;
+  }
+  #loginSection {
+  min-height: 100vh;
+  padding: 20px;
+  background-image: url('Images/tierra.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenedor flex para formulario y la imagen */
+.login-container {
+  display: flex;
+  align-items: center;
+  gap: 40px; /* espacio entre formulario e imagen */
+  background: rgba(0, 0, 0, 0.5); /* fondo semitransparente */
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 900px;
+  width: 90%;
+}
+
+/* Ajuste formulario para que ocupe más espacio */
+#loginForm {
+  flex: 1;
+}
+
+/* Wrapper para la imagen para controlar tamaño */
+.coran-image-wrapper {
+  flex-shrink: 0;
+}
+
+.coran-img {
+  width: 120px; /* tamaño fijo pero adaptable */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+  .coran-img {
+    width: 100px;
+  }
+}
+@media (max-width: 480px) {
+  #loginSection {
+    padding: 10px;
+  }
+  .coran-img {
+    width: 80px;
+  }
+}
+body.dark-mode footer.mt-4.py-3.border-top.text-center.text-muted {
+  color: #ccc !important;  /* Texto gris claro */
+}
+
+body.dark-mode footer.mt-4.py-3.border-top.text-center.text-muted a {
+  color: #9ecfff !important; /* Links azul claro */
+  text-decoration: underline;
+}
+body.dark-mode .modal-content {
+  background-color: #2c2c2c !important;  /* fondo oscuro */
+  color: #ccc !important;                 /* texto claro */
+}
+
+body.dark-mode .modal-content a {
+  color: #9ecfff !important;              /* enlaces azul claro */
+  text-decoration: underline;
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+  border-color: #444 !important;          /* bordes más visibles en modo oscuro */
+  background-color: #2c2c2c !important;   /* fondo oscuro en header y footer */
+}
+
+body.dark-mode .btn-close {
+  filter: invert(1);                      /* para que el botón cerrar se vea bien */
+}
+</style>
+</head>
+<body>
+  <!-- Imagen fija del Corán -->
+   <img src="Images/Coran.jpg" alt="Corán" class="coran-img">
+
+  <header class="mb-4" role="banner">
+    <h1 id="appTitle">Aprende Árabe con Harakat</h1>
+    <button id="toggleDarkMode" class="btn btn-secondary" aria-pressed="false">Modo Oscuro</button>
+  </header>
+
+<main role="main">
+  
+  <!-- Login -->
+  <section id="loginSection" class="active" aria-labelledby="loginTitle">
+  <div class="login-container">
+    <form id="loginForm" novalidate>
+      <h2 id="loginTitle">Iniciar sesión</h2> <!-- Poner el título aquí -->
+      <div class="mb-3">
+        <label for="loginEmail" class="form-label">Correo electrónico</label>
+        <input type="email" id="loginEmail" class="form-control" required aria-describedby="emailHelp" />
+        <div class="invalid-feedback" role="alert" aria-live="assertive" id="loginEmailError"></div>
+      </div>
+      <div class="mb-3">
+        <label for="loginPassword" class="form-label">Contraseña</label>
+        <input type="password" id="loginPassword" class="form-control" required minlength="6" />
+        <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
+      </div>
+      <button type="submit" class="btn btn-primary">Entrar</button>
+      <button type="button" id="goToRegister" class="btn btn-outline-secondary ms-2">Registrarse</button>
+    </form>
+    <div class="coran-image-wrapper">
+      <img src="Images/Coran.jpg" alt="Corán" class="coran-img" />
+    </div>
+  </div>
+</section>
+
+  <!-- Registro -->
+  <section id="registerSection" aria-labelledby="registerTitle">
+    <h2 id="registerTitle">Registro</h2>
+    <form id="registerForm" novalidate>
+      <div class="mb-3">
+        <label for="regName" class="form-label">Nombre</label>
+        <input type="text" id="regName" class="form-control" required />
+        <div class="invalid-feedback">Por favor ingresa tu nombre.</div>
+      </div>
+      <div class="mb-3">
+        <label for="regEmail" class="form-label">Correo electrónico</label>
+        <input type="email" id="regEmail" class="form-control" required />
+        <div class="invalid-feedback">Por favor ingresa un correo válido.</div>
+      </div>
+      <div class="mb-3">
+        <label for="regPassword" class="form-label">Contraseña</label>
+        <input type="password" id="regPassword" class="form-control" required minlength="6" />
+        <div class="invalid-feedback">La contraseña debe tener al menos 6 caracteres.</div>
+      </div>
+      <div class="mb-3">
+        <label for="regConfirmPassword" class="form-label">Confirmar contraseña</label>
+        <input type="password" id="regConfirmPassword" class="form-control" required />
+        <div class="invalid-feedback">Las contraseñas deben coincidir.</div>
+      </div>
+      <button type="submit" class="btn btn-success">Registrarse</button>
+      <button type="button" id="goToLogin" class="btn btn-outline-secondary ms-2">Volver al login</button>
+    </form>
+
+  </section>
+
+  <!-- Pantalla Principal -->
+  <section id="mainSection" aria-labelledby="mainTitle">
+    <h2 id="mainTitle">Bienvenida</h2>
+    <p id="welcomeMsg"></p>
+
+    <label for="languageSelect" class="form-label mt-3">Seleccionar idioma</label>
+    <select id="languageSelect" class="form-select" aria-label="Selector de idioma">
+      <option value="es">Español - Árabe</option>
+      <option value="en">Inglés - Árabe</option>
+      <option value="ar">عربى (العربية)</option>
+       <option value="fr">Francés - Árabe</option>
+       <option value="de">Alemán - Árabe</option>
+       <option value="it">Italiano - Árabe</option>
+    </select>
+
+    <div class="mt-4">
+      <button class="btn btn-outline-primary me-2" onclick="showSection('alphabetSection')">Ir a Alfabeto</button>
+      <button class="btn btn-outline-primary me-2" onclick="showSection('modulesSection')">Ir a Módulos</button>
+      <button class="btn btn-outline-primary me-2" onclick="showSection('settingsSection')">Ir a Ajustes</button>
+      <button class="btn btn-outline-primary me-2" onclick="showSection('progressSection')">Ver progreso</button>
+</div>
+
+    <button id="logoutBtn" class="btn btn-danger mt-3">Cerrar sesión</button>
+  </section>
+
+<!-- Pantalla Alfabeto -->
+<section id="alphabetSection" aria-labelledby="alphabetTitle" style="display:none;">
+  <h2 id="alphabetTitle">Alfabeto Árabe con Harakat</h2>
+  <p>Aquí verás el alfabeto con sus nombres y los diferentes harakats (Fatha, Kasra, Damma, Sukun, Shadda).</p>
+  
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Letra</th>
+        <th>Nombre</th>
+        <th>Fatha (َ)</th>
+        <th>Kasra (ِ)</th>
+        <th>Damma (ُ)</th>
+        <th>Sukun (ْ)</th>
+        <th>Shadda (ّ)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>ا</td><td>Alif</td><td>أَ</td><td>إِ</td><td>أُ</td><td>ـ</td><td>ـ</td></tr>
+      <tr><td>ب</td><td>Ba</td><td>بَ</td><td>بِ</td><td>بُ</td><td>بْ</td><td>بّ</td></tr>
+      <tr><td>ت</td><td>Ta</td><td>تَ</td><td>تِ</td><td>تُ</td><td>تْ</td><td>تّ</td></tr>
+      <tr><td>ث</td><td>Tha</td><td>ثَ</td><td>ثِ</td><td>ثُ</td><td>ثْ</td><td>ثّ</td></tr>
+      <tr><td>ج</td><td>Jim</td><td>جَ</td><td>جِ</td><td>جُ</td><td>جْ</td><td>جّ</td></tr>
+      <tr><td>ح</td><td>Ḥa</td><td>حَ</td><td>حِ</td><td>حُ</td><td>حْ</td><td>حّ</td></tr>
+      <tr><td>خ</td><td>Kha</td><td>خَ</td><td>خِ</td><td>خُ</td><td>خْ</td><td>خّ</td></tr>
+      <tr><td>د</td><td>Dal</td><td>دَ</td><td>دِ</td><td>دُ</td><td>دْ</td><td>دّ</td></tr>
+      <tr><td>ذ</td><td>Dhal</td><td>ذَ</td><td>ذِ</td><td>ذُ</td><td>ذْ</td><td>ذّ</td></tr>
+      <tr><td>ر</td><td>Ra</td><td>رَ</td><td>رِ</td><td>رُ</td><td>رْ</td><td>رّ</td></tr>
+      <tr><td>ز</td><td>Zay</td><td>زَ</td><td>زِ</td><td>زُ</td><td>زْ</td><td>زّ</td></tr>
+      <tr><td>س</td><td>Sin</td><td>سَ</td><td>سِ</td><td>سُ</td><td>سْ</td><td>سّ</td></tr>
+      <tr><td>ش</td><td>Shin</td><td>شَ</td><td>شِ</td><td>شُ</td><td>شْ</td><td>شّ</td></tr>
+      <tr><td>ص</td><td>Ṣad</td><td>صَ</td><td>صِ</td><td>صُ</td><td>صْ</td><td>صّ</td></tr>
+      <tr><td>ض</td><td>Ḍad</td><td>ضَ</td><td>ضِ</td><td>ضُ</td><td>ضْ</td><td>ضّ</td></tr>
+      <tr><td>ط</td><td>Ṭa</td><td>طَ</td><td>طِ</td><td>طُ</td><td>طْ</td><td>طّ</td></tr>
+      <tr><td>ظ</td><td>Ẓa</td><td>ظَ</td><td>ظِ</td><td>ظُ</td><td>ظْ</td><td>ظّ</td></tr>
+      <tr><td>ع</td><td>‘Ayn</td><td>عَ</td><td>عِ</td><td>عُ</td><td>عْ</td><td>عّ</td></tr>
+      <tr><td>غ</td><td>Ghayn</td><td>غَ</td><td>غِ</td><td>غُ</td><td>غْ</td><td>غّ</td></tr>
+      <tr><td>ف</td><td>Fa</td><td>فَ</td><td>فِ</td><td>فُ</td><td>فْ</td><td>فّ</td></tr>
+      <tr><td>ق</td><td>Qaf</td><td>قَ</td><td>قِ</td><td>قُ</td><td>قْ</td><td>قّ</td></tr>
+      <tr><td>ك</td><td>Kaf</td><td>كَ</td><td>كِ</td><td>كُ</td><td>كْ</td><td>كّ</td></tr>
+      <tr><td>ل</td><td>Lam</td><td>لَ</td><td>لِ</td><td>لُ</td><td>لْ</td><td>لّ</td></tr>
+      <tr><td>م</td><td>Mim</td><td>مَ</td><td>مِ</td><td>مُ</td><td>مْ</td><td>مّ</td></tr>
+      <tr><td>ن</td><td>Nun</td><td>نَ</td><td>نِ</td><td>نُ</td><td>نْ</td><td>نّ</td></tr>
+      <tr><td>هـ</td><td>Ha</td><td>هَ</td><td>هِ</td><td>هُ</td><td>هْ</td><td>هّ</td></tr>
+      <tr><td>و</td><td>Waw</td><td>وَ</td><td>وِ</td><td>وُ</td><td>وْ</td><td>وّ</td></tr>
+      <tr><td>ي</td><td>Ya</td><td>يَ</td><td>يِ</td><td>يُ</td><td>يْ</td><td>يّ</td></tr>
+    </tbody>
+  </table>
+  
+  <button class="btn btn-secondary mt-3" onclick="showSection('mainSection')">Volver</button>
+</section>
+
+  <!-- Pantalla Módulos -->
+  <section id="modulesSection" aria-labelledby="modulesTitle">
+  <h2 id="modulesTitle">Módulos de aprendizaje</h2>
+  <ul>
+   <li>
+ <button class="btn btn-link" type="button" onclick="toggleModuleContent('saludosContent')">Saludos</button>
+<div id="saludosContent" style="display:none; margin-left:20px;">
+  <p><strong>السلام عليكم</strong> = <em>As-salāmu ʿalaykum</em> — La paz sea contigo / Saludo islámico formal</p>
+  <p><strong>وعليكم السلام</strong> = <em>Wa ʿalaykum as-salām</em> — Y contigo la paz (respuesta)</p>
+  <p><strong>مرحبًا</strong> = <em>Marḥabān</em> — Hola / Bienvenido</p>
+  <p><strong>أهلاً</strong> = <em>Ahlan</em> — Hola / Bienvenido</p>
+  <p><strong>أهلاً وسهلاً</strong> = <em>Ahlan wa sahlan</em> — Bienvenido</p>
+  <p><strong>صباح الخير</strong> = <em>Ṣabāḥ al-khayr</em> — Buenos días</p>
+  <p><strong>صباح النور</strong> = <em>Ṣabāḥ an-nūr</em> — Buenos días (respuesta)</p>
+  <p><strong>مساء الخير</strong> = <em>Masāʾ al-khayr</em> — Buenas tardes/noches</p>
+  <p><strong>مساء النور</strong> = <em>Masāʾ an-nūr</em> — Buenas tardes/noches (respuesta)</p>
+  <p><strong>كيف حالك؟ (m)</strong> = <em>Kayfa ḥāluka</em> — ¿Cómo estás? (a hombre)</p>
+  <p><strong>كيف حالك؟ (f)</strong> = <em>Kayfa ḥāluki</em> — ¿Cómo estás? (a mujer)</p>
+  <p><strong>الحمد لله</strong> = <em>Al-ḥamdu lillāh</em> — Gracias a Dios / Estoy bien</p>
+  <p><strong>بخير، شكرًا</strong> = <em>Bikhayr, shukran</em> — Bien, gracias</p>
+  <p><strong>مع السلامة</strong> = <em>Maʿa as-salāmah</em> — Adiós / Con paz</p>
+  <p><strong>في أمان الله</strong> = <em>Fī amān Allāh</em> — Que Dios te proteja (despedida)</p>
+</div>
+</li>
+    <li>
+  <button class="btn btn-link" type="button" onclick="toggleModuleContent('vocabularioContent')">Vocabulario</button>
+<div id="vocabularioContent" style="display:none; margin-left:20px;">
+  <p><strong>كتاب</strong> = <em>Kitāb</em> — Libro</p>
+  <p><strong>مدرسة</strong> = <em>Madrasa</em> — Escuela</p>
+  <p><strong>باب</strong> = <em>Bāb</em> — Puerta</p>
+  <p><strong>بيت</strong> = <em>Bayt</em> — Casa</p>
+  <p><strong>ماء</strong> = <em>Māʾ</em> — Agua</p>
+  <p><strong>طعام</strong> = <em>Ṭaʿām</em> — Comida</p>
+  <p><strong>سماء</strong> = <em>Samāʾ</em> — Cielo</p>
+  <p><strong>قمر</strong> = <em>Qamar</em> — Luna</p>
+  <p><strong>شمس</strong> = <em>Shams</em> — Sol</p>
+  <p><strong>ولد</strong> = <em>Walad</em> — Niño</p>
+  <p><strong>بنت</strong> = <em>Bint</em> — Niña</p>
+  <p><strong>قلب</strong> = <em>Qalb</em> — Corazón</p>
+  <p><strong>سلام</strong> = <em>Salām</em> — Paz</p>
+  <p><strong>صديق</strong> = <em>Ṣadīq</em> — Amigo</p>
+  <p><strong>حب</strong> = <em>Ḥubb</em> — Amor</p>
+</div>
+</li>
+    <li>
+ <button class="btn btn-link" type="button" onclick="toggleModuleContent('objetosContent')">Objetos</button>
+<div id="objetosContent" style="display:none; margin-left:20px;">
+  <p><strong>طاولة</strong> = <em>Ṭāwila</em> — Mesa</p>
+  <p><strong>كرسي</strong> = <em>Kursī</em> — Silla</p>
+  <p><strong>باب</strong> = <em>Bāb</em> — Puerta</p>
+  <p><strong>نافذة</strong> = <em>Nāfiḏa</em> — Ventana</p>
+  <p><strong>سرير</strong> = <em>Sarīr</em> — Cama</p>
+  <p><strong>مصباح</strong> = <em>Miṣbāḥ</em> — Lámpara</p>
+  <p><strong>ساعة</strong> = <em>Sāʿa</em> — Reloj</p>
+  <p><strong>حقيبة</strong> = <em>Ḥaqība</em> — Bolsa / Mochila</p>
+  <p><strong>هاتف</strong> = <em>Hātif</em> — Teléfono</p>
+  <p><strong>قلم</strong> = <em>Qalam</em> — Bolígrafo</p>
+  <p><strong>لوحة</strong> = <em>Lawḥa</em> — Cuadro / Pizarra</p>
+  <p><strong>ثلاجة</strong> = <em>Thalāja</em> — Refrigerador</p>
+  <p><strong>طعام</strong> = <em>Ṭaʿām</em> — Comida</p>
+  <p><strong>مرآة</strong> = <em>Mirʾā</em> — Espejo</p>
+  <p><strong>سجادة</strong> = <em>Sajjāda</em> — Alfombra</p>
+</div>
+</li>
+
+    <!-- Añade más módulos -->
+     <p>Selecciona un módulo para aprender vocabulario y frases comunes en árabe con su pronunciación y traducción.</p>
+ </ul>
+  <button class="btn btn-secondary" onclick="showSection('mainSection')">Volver</button>
+</section>
+
+<!-- Pantalla Progreso -->
+<section id="progressSection" aria-labelledby="progressTitle" style="display:none;">
+  <h2 id="progressTitle">Tu progreso</h2>
+  <div id="progressContent">
+    <!-- Aquí se mostrará el progreso -->
+  </div>
+  <button class="btn btn-secondary mt-3" onclick="showSection('mainSection')">Volver</button>
+</section>
+
+  <!-- Pantalla Ajustes -->
+  <section id="settingsSection" aria-labelledby="settingsTitle">
+    <h2 id="settingsTitle">Ajustes</h2>
+    <form id="settingsForm">
+      <div class="mb-3">
+        <label for="fontSize" class="form-label">Tamaño de fuente</label>
+        <select id="fontSize" class="form-select" aria-label="Seleccionar tamaño de fuente">
+          <option value="16">Normal</option>
+          <option value="20">Grande</option>
+          <option value="24">Muy grande</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="languageSetting" class="form-label">Idioma de la interfaz</label>
+        <select id="languageSetting" class="form-select" aria-label="Seleccionar idioma de la interfaz">
+          <option value="es">Español - Árabe</option>
+          <option value="en">Inglés - Árabe</option>
+          <option value="ar">عربى (العربية)</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar ajustes</button>
+      <button type="button" class="btn btn-secondary ms-2" onclick="showSection('mainSection')">Cancelar</button>
+    </form>
+  </section>
+
+</main>
+
+<!-- Bootstrap JS bundle (incluye Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Utilidades para localStorage usuarios
+  function getUsers() {
+    return JSON.parse(localStorage.getItem('users') || '[]');
+  }
+  function saveUsers(users) {
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+  function addUser(user) {
+    const users = getUsers();
+    users.push(user);
+    saveUsers(users);
+  }
+  function findUser(email) {
+    return getUsers().find(u => u.email.toLowerCase() === email.toLowerCase());
+  }
+  function setCurrentUser(user) {
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+  function getCurrentUser() {
+    return JSON.parse(localStorage.getItem('currentUser') || 'null');
+  }
+  function clearCurrentUser() {
+    localStorage.removeItem('currentUser');
+  }
+
+  // Mostrar/ocultar secciones
+  function showSection(id) {
+  document.querySelectorAll('main section').forEach(sec => {
+    sec.classList.remove('active');
+    sec.style.display = 'none'; // Ocultar todas las secciones
+  });
+  const section = document.getElementById(id);
+  if (section) {
+    section.classList.add('active');
+    section.style.display = 'block'; // Mostrar la sección deseada
+  }
+}
+
+  // Mensajes de validación para el registro
+  function validateRegisterForm() {
+    let valid = true;
+    const name = document.getElementById('regName');
+    const email = document.getElementById('regEmail');
+    const pass = document.getElementById('regPassword');
+    const confirm = document.getElementById('regConfirmPassword');
+
+    // Validar nombre
+    if (!name.value.trim()) {
+      name.classList.add('is-invalid');
+      valid = false;
+    } else {
+      name.classList.remove('is-invalid');
+    }
+
+    // Validar email
+    if (!email.value.trim() || !email.checkValidity()) {
+      email.classList.add('is-invalid');
+      valid = false;
+    } else {
+      email.classList.remove('is-invalid');
+    }
+
+    // Validar contraseña
+    if (!pass.value || pass.value.length < 6) {
+      pass.classList.add('is-invalid');
+      valid = false;
+    } else {
+      pass.classList.remove('is-invalid');
+    }
+
+    // Validar confirmación
+    if (confirm.value !== pass.value || !confirm.value) {
+      confirm.classList.add('is-invalid');
+      valid = false;
+    } else {
+      confirm.classList.remove('is-invalid');
+    }
+
+    return valid;
+  }
+
+  // Cargar usuario demo para pruebas (si no existe)
+  if (!findUser('demo@demo.com')) {
+    addUser({ name: 'Usuario Demo', email: 'demo@demo.com', password: 'demo123' });
+  }
+
+  // Eventos
+  document.getElementById('goToRegister').addEventListener('click', () => {
+    showSection('registerSection');
+  });
+
+  document.getElementById('goToLogin').addEventListener('click', () => {
+    showSection('loginSection');
+  });
+
+  document.getElementById('registerForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if (validateRegisterForm()) {
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value;
+
+      if (findUser(email)) {
+        alert('⚠️ El correo ya está registrado.');
+        return;
+      }
+
+      addUser({ name, email, password });
+      alert('✅ Registro exitoso. Ya puedes iniciar sesión.');
+      showSection('loginSection');
+      document.getElementById('registerForm').reset();
+    }
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const loginEmailInput = document.getElementById('loginEmail');
+    const loginPasswordInput = document.getElementById('loginPassword');
+
+    // Validaciones HTML5
+    if (!loginEmailInput.checkValidity()) {
+      loginEmailInput.classList.add('is-invalid');
+      return;
+    } else {
+      loginEmailInput.classList.remove('is-invalid');
+    }
+    if (!loginPasswordInput.value || loginPasswordInput.value.length < 6) {
+      loginPasswordInput.classList.add('is-invalid');
+      return;
+    } else {
+      loginPasswordInput.classList.remove('is-invalid');
+    }
+
+    const user = findUser(email);
+    if (user && user.password === password) {
+      setCurrentUser(user);
+      showSection('mainSection');
+      updateWelcomeMessage(user.name);
+      document.getElementById('loginForm').reset();
+    } else {
+      alert('❌ Usuario o contraseña incorrectos.');
+    }
+  });
+
+  // Selector de idioma
+  document.getElementById('languageSelect').addEventListener('change', e => {
+    const val = e.target.value;
+    // Puedes aquí modificar textos o contenido según idioma
+    let welcomeText = '';
+    switch(val) {
+      case 'es':
+        welcomeText = 'Bienvenida a la aplicación Aprende Árabe con Harakat.';
+        document.documentElement.lang = 'es';
+        document.documentElement.dir = 'ltr';
+        break;
+      case 'en':
+        welcomeText = 'Welcome to the Learn Arabic with Harakat app.';
+        document.documentElement.lang = 'en';
+        document.documentElement.dir = 'ltr';
+        break;
+      case 'ar':
+        welcomeText = 'مرحباً بك في تطبيق تعلم العربية مع الحركات.';
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+        break;
+         case 'fr':
+      welcomeText = 'Bienvenue dans l\'application Apprendre l\'arabe avec Harakat.';
+      document.documentElement.lang = 'fr';
+      document.documentElement.dir = 'ltr';
+      break;
+
+    case 'de':
+      welcomeText = 'Willkommen in der App Arabisch lernen mit Harakat.';
+      document.documentElement.lang = 'de';
+      document.documentElement.dir = 'ltr';
+      break;
+
+    case 'it':
+      welcomeText = 'Benvenuto nell\'app Imparare l\'arabo con Harakat.';
+      document.documentElement.lang = 'it';
+      document.documentElement.dir = 'ltr';
+      break;
+      default:
+        welcomeText = 'Bienvenida a la aplicación Aprende Árabe con Harakat.';
+        document.documentElement.lang = 'es';
+        document.documentElement.dir = 'ltr';
+    }
+    document.getElementById('welcomeMsg').textContent = welcomeText;
+  });
+
+  // Inicializar mensaje idioma por defecto
+  document.getElementById('languageSelect').dispatchEvent(new Event('change'));
+
+  // Botón cerrar sesión
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    clearCurrentUser();
+    showSection('loginSection');
+  });
+
+  // Modo oscuro
+  const darkModeBtn = document.getElementById('toggleDarkMode');
+  darkModeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    darkModeBtn.textContent = isDark ? 'Modo Claro' : 'Modo Oscuro';
+    darkModeBtn.setAttribute('aria-pressed', isDark);
+  });
+
+  // Mantener sesión abierta (si ya hay usuario)
+  window.addEventListener('load', () => {
+    const currentUser = getCurrentUser();
+    if (currentUser) {
+      showSection('mainSection');
+      updateWelcomeMessage(currentUser.name);
+    }
+    applySettings();
+  });
+
+  // Actualiza mensaje bienvenida
+  function updateWelcomeMessage(name) {
+    const lang = document.getElementById('languageSelect').value;
+    let msg = '';
+    if(lang === 'ar') {
+      msg = `مرحباً، ${name}`;
+    } else if(lang === 'en') {
+      msg = `Welcome, ${name}`;
+    } else {
+      msg = `Bienvenida, ${name}`;
+    }
+    document.getElementById('welcomeMsg').textContent = msg;
+  }
+
+  // Ajustes: aplicar configuración guardada o por defecto
+  function applySettings() {
+    const fontSize = localStorage.getItem('fontSize') || '16';
+    const language = localStorage.getItem('interfaceLanguage') || 'es';
+
+    document.body.style.fontSize = fontSize + 'px';
+    document.getElementById('fontSize').value = fontSize;
+    document.getElementById('languageSetting').value = language;
+
+    // Cambiar idioma en selector principal
+    document.getElementById('languageSelect').value = language;
+    document.getElementById('languageSelect').dispatchEvent(new Event('change'));
+  }
+
+  document.getElementById('settingsForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const fontSize = document.getElementById('fontSize').value;
+    const language = document.getElementById('languageSetting').value;
+
+    localStorage.setItem('fontSize', fontSize);
+    localStorage.setItem('interfaceLanguage', language);
+
+    applySettings();
+    alert('✅ Ajustes guardados.');
+    showSection('mainSection');
+  });
+
+  function toggleModuleContent(id) {
+  const el = document.getElementById(id);
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+  } else {
+    el.style.display = 'none';
+  }
+}
+
+function mostrarProgreso() {
+  const progressDiv = document.getElementById('progressContent');
+  // Datos de ejemplo
+  const data = {
+    modulosCompletados: 3,
+    palabrasAprendidas: 45,
+    sesiones: 12,
+  };
+
+  // Actualiza el contenido con los datos
+  progressDiv.innerHTML = `
+    <p><strong>Módulos completados:</strong> ${data.modulosCompletados}</p>
+    <p><strong>Palabras aprendidas:</strong> ${data.palabrasAprendidas}</p>
+    <p><strong>Sesiones realizadas:</strong> ${data.sesiones}</p>
+  `;
+}
+
+// Cuando se muestre la sección progreso, actualiza el contenido
+document.querySelector("button[onclick=\"showSection('progressSection')\"]").addEventListener('click', () => {
+  mostrarProgreso();
+});
+</script>
+<footer role="contentinfo" class="mt-4 py-3 border-top text-center text-muted">
+  <p>© 2025 Aprende Árabe con Harakat. Todos los derechos reservados.</p>
+  <p>
+    <a href="#" class="link-primary" data-bs-toggle="modal" data-bs-target="#contactModal">Contacto</a> | 
+    <a href="#" class="link-primary" data-bs-toggle="modal" data-bs-target="#termsModal">Términos y condiciones</a>
+  </p>
+</footer>
+
+<!-- Modal de Contacto -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="contactModalLabel">Contacto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body text-start">
+        <p><strong>Nombre del creador:</strong> Martha Edilma Tayan</p>
+        <p><strong>Correo electrónico:</strong> <a href="mailto:mtayan@utm.edu.ec">mtayan@utm.edu.ec</a></p>
+        <p><strong>Teléfono:</strong> <a href="tel:+593959595749">0959595749</a></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Términos y condiciones -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="termsModalLabel">Términos y condiciones</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body text-start" style="max-height: 400px; overflow-y: auto;">
+        <p>
+          Bienvenido a Aprende Árabe con Harakat. Al utilizar esta aplicación, aceptas cumplir con los siguientes términos y condiciones:
+        </p>
+        <ul>
+          <li>La aplicación se ofrece "tal cual" sin garantías explícitas.</li>
+          <li>Los datos de usuario son almacenados localmente en el navegador y no se comparten.</li>
+          <li>El creador no se hace responsable por daños derivados del uso de la aplicación.</li>
+          <li>El contenido es para fines educativos y personales únicamente.</li>
+          <li>Se prohíbe la redistribución comercial sin permiso.</li>
+        </ul>
+        <p>Para más información, contacta al creador.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
